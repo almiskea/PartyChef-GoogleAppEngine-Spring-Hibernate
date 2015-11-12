@@ -31,12 +31,12 @@ public class UsersDao {
 
     
     
-    public static void addUser(String userid, String password,String name,String country, String city,String state,String zip,String email,String phone, String cuisine) throws ClassNotFoundException, SQLException{
+    public static void addUser(String username, String password,String name,String country, String city,String state,String zip,String email,String phone, String cuisine) throws ClassNotFoundException, SQLException{
         
         EntityManager em = Database.getEntityManager();
         
         em.getTransaction().begin();
-        em.persist(new Users( userid,  password, name, country,  city, state, zip, email, phone, cuisine));
+        em.persist(new Users( username,  password, name, country,  city, state, zip, email, phone, cuisine));
         em.getTransaction().commit();
         em.close();
         

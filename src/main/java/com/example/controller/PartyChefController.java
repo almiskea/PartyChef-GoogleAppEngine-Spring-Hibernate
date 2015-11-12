@@ -129,11 +129,8 @@ public class PartyChefController {
     }
 
     @RequestMapping("/logoutMethod")
-    public String logoutMethod(
-            @RequestParam(required = true, value = "username") String username,
-            @RequestParam(required = true, value = "password") String password, HttpSession session,
-            Model model) {
-        session.removeAttribute("username");
+    public String logoutMethod(HttpSession session) {
+       // session.removeAttribute("username");
         session.invalidate();
 
         return "login";

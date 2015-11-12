@@ -28,7 +28,7 @@
         <div id="main">
             Welcome ${sessionScope.username}
             <br><br>
-            <a href="LogoutServlet.do">Logout</a>
+            <a href="logoutMethod">Logout</a>
             
             <h1>PATRY CHEF USERS </h1>
             <h2>Web Site USERS:</h2>

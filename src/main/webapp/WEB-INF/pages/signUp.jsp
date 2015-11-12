@@ -14,14 +14,14 @@
 <meta name="keywords" content="example, JavaScript Form Validation, Sample registration form" />  
 <meta name="description" content="This document is an example of JavaScript Form Validation using a sample registration form. " />  
 <link rel='stylesheet' href='js-form-validation.css' type='text/css' />  
-<script src="formValidation.js"></script>  
+<script src="${pageContext.request.contextPath}/pages/formValidation.js"></script>  
 </head>  
 <body onload="document.registration.userid.focus();">  
 <h1>Registration Form</h1>  
 <p>Use tab keys to move from one input field to the next.</p>  
 <form name='registration' action="signUpMethod" method="post" onchange="return formValidation();">  
 <ul>  
-<li><label for="username">User id:</label><font color="red">${requestScope.error}</font> </li> 
+<li><label for="username">User id:</label><font color="red">${msg}</font> </li> 
 <li><input type="text" name="username" size="12" /><font color="red"><label id="muserid"></label></font> </li>  
 <li><label for="password">Password:</label></li>  
 <li><input type="password" name="password" size="12" /><font color="red"><label id="mpassid"></label></font> </li>  

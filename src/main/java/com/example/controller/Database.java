@@ -58,8 +58,8 @@ public class Database {
     }
 
     
-    public static void insertUser(String userid, String password, String name, String country, String city, String state, String zip, String email, String phone, String cuisine) throws ClassNotFoundException, SQLException {
-        UsersDao.addUser(userid,  password, name, country,  city, state, zip, email, phone, cuisine);
+    public static void insertUser(String username, String password, String name, String country, String city, String state, String zip, String email, String phone, String cuisine) throws ClassNotFoundException, SQLException {
+        UsersDao.addUser(username,  password, name, country,  city, state, zip, email, phone, cuisine);
     }
 
     public static boolean getValidUserAndPass(String username, String password) throws ClassNotFoundException, SQLException {
