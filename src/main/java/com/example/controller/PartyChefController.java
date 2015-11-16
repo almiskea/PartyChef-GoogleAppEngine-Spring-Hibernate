@@ -95,7 +95,7 @@ public class PartyChefController {
             //rd.forward(req, response);
             //response.sendRedirect("Home.jsp");
         } else {
-            model.addAttribute("msg", "email or password is invalid");
+            model.addAttribute("msg", "username or password is invalid");
             return "login";
             //req.setAttribute("error", "username or password is invalid");
             //RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
@@ -122,7 +122,7 @@ public class PartyChefController {
 
         } else if (existEmail){
 
-            model.addAttribute("msgEmail", "username already exists");
+            model.addAttribute("msgEmail", "email already exists");
             return "signUp";
             
         }else {
