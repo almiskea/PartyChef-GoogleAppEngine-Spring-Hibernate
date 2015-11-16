@@ -73,11 +73,7 @@
                         }
                    %>
             </table>
-            <p>Pages (HTML)</p>
-            <p>Style Sheets (CSS)</p>
-            <p>Computer Code (JavaScript)</p>
-            <p>Live Data (Files and Databases)</p>
-            <footer id="foot01"></footer>
+            
   
         </div>
         <script src="${pageContext.request.contextPath}/pages/script.js"></script>

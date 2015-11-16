@@ -8,57 +8,71 @@
 
 
 <!DOCTYPE html>  
-<html lang="en"><head>  
-<meta charset="utf-8">  
-<title>JavaScript Form Validation using a sample registration form</title>  
-<meta name="keywords" content="example, JavaScript Form Validation, Sample registration form" />  
-<meta name="description" content="This document is an example of JavaScript Form Validation using a sample registration form. " />  
-<link rel='stylesheet' href='js-form-validation.css' type='text/css' />  
-<script src="${pageContext.request.contextPath}/pages/formValidation.js"></script>  
+<title>JavaScript Form Validation using a sample registration form</title>   
+<link href="${pageContext.request.contextPath}/pages/forms.css" rel="stylesheet" type="text/css" /> 
+<script src="${pageContext.request.contextPath}/pages/formValidation.js"></script> 
+
 </head>  
-<body onload="document.registration.userid.focus();">  
-<h1>Registration Form</h1>  
-<p>Use tab keys to move from one input field to the next.</p>  
-<form name='registration' action="signUpMethod" method="post" onchange="return formValidation();" >  
-<ul>  
-<li><label for="username">User id:</label><font color="red">${msgUser}</font> </li> 
-<li><input type="text" name="username" size="12" /><font color="red"><label id="muserid"></label></font> </li>  
-<li><label for="password">Password:</label></li>  
-<li><input type="password" name="password" size="12" /><font color="red"><label id="mpassid"></label></font> </li>  
-<li><label for="name">Name:</label></li>  
-<li><input type="text" name="name" size="50" /><font color="red"><label id="musername"></label></font></li>   
-<li><label for="phone">Phone:</label></li>  
-<li><input type="text" name="phone" size="50" /><font color="red"><label id="mphone"></label></font></li>   
-<li><label for="cuisine">Cuisine:</label></li>  
-<li><input type="text" name="cuisine" size="50" /><font color="red"><label id="mcuisine"></label></font></li>   
-<li><label for="country">Country:</label></li>  
-<li><select name="country">  
-<option selected="" value="Default">(Please select a country)<font color="red"><label id="mcountry"></label></font></option>  
-<option value="AF">Australia</option>  
-<option value="AL">Canada</option>  
-<option value="DZ">India</option>  
-<option value="AS">Russia</option>  
-<option value="AD">USA</option>  
-</select></li> 
-<li><label for="city">City:</label></li>  
-<li><input type="text" name="city" /></li>
-<li><label for="state">State:</label></li>  
-<li><input type="text" name="state" /></li>
-<li><label for="zip">ZIP Code:</label></li>  
-<li><input type="text" name="zip" /><font color="red"><label id="mzip"></label></font></li>  
-<li><label for="email">Email:</label><font color="red">${msgEmail}</font> </li>  
-<li><input type="text" name="email" size="50" /><font color="red"><label id="memail"></label></font></li>  
-<li><label id="gender">Sex:</label></li> 
-<font color="red"><label id="mgender"></label></font> 
-<li><input type="radio" name="msex" value="Male" /><span>Male</span></li>  
-<li><input type="radio" name="fsex" value="Female" /><span>Female</span></li>  
-<li><label>Language:</label></li>  
-<li><input type="checkbox" name="en" value="en" checked /><span>English</span></li>  
-<li><input type="checkbox" name="nonen" value="noen" /><span>Non English</span></li>  
-<li><label for="desc">About:</label></li>  
-<li><textarea name="desc" id="desc"></textarea></li>  
-<li><input type="submit" name="submit" value="Submit" /></li>  
-</ul>  
+<body>  
+    <h1>Registration Form</h1>  
+    <p>Use tab keys to move from one input field to the next.</p>  
+    <form name='registration' action="signUpMethod" method="post" onchange="return formValidation();" >  
+        <table> 
+            <tr>
+                <td><label for="username">User id:</label><font color="red">${msgUser}</font></td>
+                <td><input type="text" name="username" size="12" /><font color="red"><label id="muserid"></label></font></td>
+            </tr><tr>
+                <td><label for="password">Password:</label></td>
+                <td><input type="password" name="password" size="12" /><font color="red"><label id="mpassid"></label></font></td>
+            </tr><tr>
+                <td><label for="name">Name:</label></li>  </td>
+                <td><input type="text" name="name" size="50" /><font color="red"><label id="musername"></label></font> </td>
+            </tr><tr>
+                <td><label for="phone">Phone:</label></li>  </td>
+                <td><input type="text" name="phone" size="50" /><font color="red"><label id="mphone"></label></font> </td>
+            </tr><tr>
+                <td><label for="cuisine">Cuisine:</label></td>
+                <td><input type="text" name="cuisine" size="50" /><font color="red"><label id="mcuisine"></label></font>  </td>
+            </tr><tr>
+                <td><label for="country">Country:</label></td>
+                <td>
+                    <select name="country">  
+                        <option selected="" value="Default">(Please select a country)<font color="red"><label id="mcountry"></label></font></option>  
+                        <option value="AF">Australia</option>  
+                        <option value="AL">Canada</option>  
+                        <option value="DZ">India</option>  
+                        <option value="AS">Russia</option>  
+                        <option value="AD">USA</option>  
+                    </select></td>
+            </tr><tr>
+                <td><label for="city">City:</label>  </td>
+                <td><input type="text" name="city" /></td>
+            </tr><tr>
+                <td><label for="state">State:</label></td>
+                <td><input type="text" name="state" /></td>
+            </tr><tr>
+                <td><label for="zip">ZIP Code:</label> </td>
+                <td><input type="text" name="zip" /><font color="red"><label id="mzip"></label></font></td>
+            </tr><tr>
+                <td><label for="email">Email:</label><font color="red">${msgEmail}</font> </td>
+                <td><input type="text" name="email" size="50" /><font color="red"><label id="memail"></label></font></td>
+            </tr><tr>
+                <td><label id="gender">Sex:</label></td>
+            <font color="red"><label id="mgender"></label></font>
+            <td><input type="radio" name="msex" value="Male" /><span>Male</span> 
+                <input type="radio" name="fsex" value="Female" /><span>Female</span></td>
+        </tr><tr>
+        <td><label>Language:</label> </td>
+        <td><input type="checkbox" name="en" value="en" checked /><span>English</span>
+            <input type="checkbox" name="nonen" value="noen" /><span>Non English</span> </td>
+    </tr><tr>
+        <td><label for="desc">About:</label> </td>
+        <td><textarea name="desc" id="desc"></textarea></td>
+    </tr>
+</table>
+<input type="submit" name="submit" value="Submit" />
+
+
 </form>  
 </body>  
 </html>  
