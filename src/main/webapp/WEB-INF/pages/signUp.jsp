@@ -19,9 +19,9 @@
 <body onload="document.registration.userid.focus();">  
 <h1>Registration Form</h1>  
 <p>Use tab keys to move from one input field to the next.</p>  
-<form name='registration' action="signUpMethod" method="post" onchange="return formValidation();">  
+<form name='registration' action="signUpMethod" method="post" onchange="return formValidation();" >  
 <ul>  
-<li><label for="username">User id:</label><font color="red">${msg}</font> </li> 
+<li><label for="username">User id:</label><font color="red">${msgUser}</font> </li> 
 <li><input type="text" name="username" size="12" /><font color="red"><label id="muserid"></label></font> </li>  
 <li><label for="password">Password:</label></li>  
 <li><input type="password" name="password" size="12" /><font color="red"><label id="mpassid"></label></font> </li>  
@@ -46,7 +46,7 @@
 <li><input type="text" name="state" /></li>
 <li><label for="zip">ZIP Code:</label></li>  
 <li><input type="text" name="zip" /><font color="red"><label id="mzip"></label></font></li>  
-<li><label for="email">Email:</label></li>  
+<li><label for="email">Email:</label><font color="red">${msgEmail}</font> </li>  
 <li><input type="text" name="email" size="50" /><font color="red"><label id="memail"></label></font></li>  
 <li><label id="gender">Sex:</label></li> 
 <font color="red"><label id="mgender"></label></font> 

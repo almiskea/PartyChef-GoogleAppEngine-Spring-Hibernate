@@ -100,6 +100,25 @@ public class Database {
         em.close();
         return false;
     }
+    
+    public static Boolean getValidEmail(String email) throws ClassNotFoundException, SQLException {
+        EntityManager em = Database.getEntityManager();
+        em.getTransaction().begin();
+        List<Users> result = em
+                .createQuery("FROM Users", Users.class)
+                .getResultList();
+        for (Users g : result) {
+
+            if (g.getEmail().equals(email) ) {
+                em.getTransaction().commit();
+                em.close();
+                return true;
+            }
+        }
+        em.getTransaction().commit();
+        em.close();
+        return false;
+    }
     public static Users getEmail(String email) throws ClassNotFoundException, SQLException {
         EntityManager em = Database.getEntityManager();
         em.getTransaction().begin();

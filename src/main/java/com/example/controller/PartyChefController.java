@@ -95,7 +95,7 @@ public class PartyChefController {
             //rd.forward(req, response);
             //response.sendRedirect("Home.jsp");
         } else {
-            model.addAttribute("msg", "username or password is invalid");
+            model.addAttribute("msg", "email or password is invalid");
             return "login";
             //req.setAttribute("error", "username or password is invalid");
             //RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
@@ -106,20 +106,26 @@ public class PartyChefController {
 
     @RequestMapping("/signUpMethod")
     public String signUpMethod(@ModelAttribute("user") Users user, Model model) throws ClassNotFoundException, SQLException {
+        
+        
+        //these two lines to check if the user and email entered are valid
+        boolean existUser = Database.getValidUser(user.getUsername());
+        boolean existEmail = Database.getValidEmail(user.getEmail());
+        
+        if (existUser) {
 
-        boolean exist = false;
-
-        exist = Database.getValidUser(user.getUsername());
-
-        if (exist) {
-
-            model.addAttribute("msg", "username already exists");
+            model.addAttribute("msgUser", "username already exists");
             return "signUp";
             // req.setAttribute("error", "username already exists");
             //RequestDispatcher rd = req.getRequestDispatcher("signUp.jsp");
             // rd.forward(req, response);
 
-        } else {
+        } else if (existEmail){
+
+            model.addAttribute("msgEmail", "username already exists");
+            return "signUp";
+            
+        }else {
 
             Database.insertUser(user.getUsername(), user.getPassword(), user.getName(), user.getCountry(), user.getCity(), user.getState(), user.getZip(), user.getEmail(), user.getPhone(), user.getCuisine());
 
