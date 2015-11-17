@@ -68,7 +68,17 @@ public class PartyChefController {
     public String index() {
         return "index";
     }
+    @RequestMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
+    /*@RequestMapping("/logoutMethod")
+    public String profileMethod(HttpSession session,Model model) {
+       // session.removeAttribute("username");
+        session.getAttribute(null);
 
+        return "login";
+    }*/
     @RequestMapping("/loginMethod")
     public String loginMethod(
             @RequestParam(required = true, value = "username") String username,

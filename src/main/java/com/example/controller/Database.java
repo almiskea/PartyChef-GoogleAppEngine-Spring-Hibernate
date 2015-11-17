@@ -137,6 +137,24 @@ public class Database {
         em.close();
         return null;
     }
+    public static Users getUsername(String user) throws ClassNotFoundException, SQLException {
+        EntityManager em = Database.getEntityManager();
+        em.getTransaction().begin();
+        List<Users> result = em
+                .createQuery("FROM Users", Users.class)
+                .getResultList();
+        for (Users g : result) {
+
+            if (g.getUsername().equals(user) ) {
+                em.getTransaction().commit();
+                em.close();
+                return g;
+            }
+        }
+        em.getTransaction().commit();
+        em.close();
+        return null;
+    }
 
     /*public static void main(String[] args) throws ClassNotFoundException, SQLException{
      DataBaseClass.insertEmp("Ali");
