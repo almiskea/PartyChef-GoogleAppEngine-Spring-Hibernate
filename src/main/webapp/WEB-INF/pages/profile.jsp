@@ -18,72 +18,78 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Our Company</title>
         <link href="${pageContext.request.contextPath}/pages/site.css" rel="stylesheet" type="text/css" />
-        
-       
+
+
     </head>
     <body>
-        
+
 
         <nav id="nav01"></nav>
         <div id="main">
             Welcome ${sessionScope.username}
             <br><br>
             <a href="logoutMethod">Logout</a>
-            
+
             <h1>PATRY CHEF USERS </h1>
             <h2>Web Site USERS:</h2>
-            <table border="1">
-                    <tr>
-                        <td>USER_ID</td>
-                        <td>NAME</td>
-                        <td>COUNTRY</td>
-                        <td>CITY</td>
-                        <td>STATE</td>
-                        <td>ZIP</td>
-                        <td>EMAIL</td>
-                        <td>PHONE</td>
-                        <td>CUISINE</td>
-                    </tr>
-                <%! 
+
+            <form name='' action="" method="post" >  
+                <table border="1">
+
+                    <%!
                         UsersDao u = new UsersDao();
                         int i = 0;
                     %>
-                    <%! 
-                        Users user ;
+                    <%!
+                        Users user;
                         HttpSession session;
                         String username;
                     %>
                     <%
-                        username = (String)session.getAttribute("username");
-                        
+                        username = (String) session.getAttribute("username");
+
                         user = u.getUser(username);
-                                
+
                     %>
-                   <%
-                        
+                    <%
                     %>
-                    
+
                     <tr>
-                        <td><% out.print(user.getUsername()); %></td>
-                        <td><% out.print(user.getName()); %></td>
-                        <td><% out.print(user.getCountry()); %></td>
-                        <td><% out.print(user.getCity()); %></td>
-                        <td><% out.print(user.getState()); %></td>
-                        <td><% out.print(user.getZip()); %></td>
-                        <td><% out.print(user.getEmail()); %></td>
-                        <td><% out.print(user.getPhone()); %></td>
-                        <td><% out.print(user.getCuisine()); %></td>
+                        <td><label for="username">User id:</label>
+                            <input type="text" name="username" placeholder="<% out.print(user.getUsername()); %>"/></td>
+                    </tr><tr>
+                        <td><label for="name">Name:</label>
+                            <input type="text" name="name" placeholder="<% out.print(user.getName()); %>"/></td>
+                    </tr><tr>
+                        <td><label for="country">Country:</label>
+                            <input type="text" name="country" placeholder="<% out.print(user.getCountry()); %>"/></td>
+                    </tr><tr>
+                        <td><label for="city">City:</label>
+                            <input type="text" name="city" placeholder="<% out.print(user.getCity()); %>"/></td>
+                    </tr><tr>
+                        <td><label for="state">State:</label>
+                            <input type="text" name="state" placeholder="<% out.print(user.getState()); %>"/></td>
+                    </tr><tr>
+                        <td><label for="zip">Zip:</label>
+                            <input type="text" name="zip" placeholder="<% out.print(user.getZip()); %>"/></td>
+                    </tr><tr>
+                        <td><label for="email">Email:</label>
+                            <input type="text" name="email" placeholder="<% out.print(user.getEmail()); %>"/></td>
+                    </tr><tr>
+                        <td><label for="phone">Phone:</label>
+                            <input type="text" name="phone" placeholder="<% out.print(user.getPhone()); %>"/></td>
+                    </tr><tr>
+                        <td><label for="cuisine">Cuisine:</label>
+                            <input type="text" name="cuisine" placeholder="<% out.print(user.getCuisine()); %>"/></td>
                     </tr>
-                   <%
-                        
-                   %>
-            </table>
-            <p>Pages (HTML)</p>
-            <p>Style Sheets (CSS)</p>
-            <p>Computer Code (JavaScript)</p>
-            <p>Live Data (Files and Databases)</p>
+                    <%
+
+                    %>
+                </table>
+                <input type="submit" value="update">
+            </form>
             <footer id="foot01"></footer>
-  
+
         </div>
         <script src="${pageContext.request.contextPath}/pages/script.js"></script>
     </body>
