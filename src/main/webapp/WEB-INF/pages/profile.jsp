@@ -33,7 +33,7 @@
             <h1>PATRY CHEF USERS </h1>
             <h2>Web Site USERS:</h2>
 
-            <form name='' action="" method="post" >  
+            <form name='profile' action="profileUpdate" method="post" >  
                 <table border="1">
 
                     <%!
@@ -56,7 +56,7 @@
 
                     <tr>
                         <td><label for="username">User id:</label>
-                            <input type="text" name="username" placeholder="<% out.print(user.getUsername()); %>"/></td>
+                            <% out.print(user.getUsername()); %></td>
                     </tr><tr>
                         <td><label for="name">Name:</label>
                             <input type="text" name="name" placeholder="<% out.print(user.getName()); %>"/></td>

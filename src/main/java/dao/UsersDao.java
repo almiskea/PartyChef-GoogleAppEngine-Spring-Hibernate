@@ -56,9 +56,18 @@ public class UsersDao {
         return usersList;
 
     }
+    
     public static Users getUser(String username) throws ClassNotFoundException, SQLException{
             
         return Database.getUsername(username);
+
+    }
+    public static Users updateUser(Users user) throws ClassNotFoundException, SQLException{
+            
+        
+        
+        
+        return Database.getUsername("username");
 
     }
 

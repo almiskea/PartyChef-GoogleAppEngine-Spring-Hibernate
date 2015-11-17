@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.controller.Database;
+import static com.example.controller.Database.updateUser;
 import java.util.Date;
 
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import dao.UsersDao;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -72,13 +74,31 @@ public class PartyChefController {
     public String profile() {
         return "profile";
     }
-    /*@RequestMapping("/logoutMethod")
-    public String profileMethod(HttpSession session,Model model) {
-       // session.removeAttribute("username");
-        session.getAttribute(null);
+    @RequestMapping("/profileUpdate")
+    public String profileMethod(HttpSession session,@RequestParam Map<String,String> reqPar) throws ClassNotFoundException, SQLException {
+       String uesrname = (String)session.getAttribute("username");
+       String city = reqPar.get("city");
+       String name = reqPar.get("name");
+       String country = reqPar.get("country");
+       String cuisine = reqPar.get("cuisine");
+       String zip = reqPar.get("zip");
+       String phone = reqPar.get("phone");
+       String email = reqPar.get("email");
+       String state = reqPar.get("state");
+       Users user = new Users();
+      // Users u.get
+       user.setUsername(uesrname);
+       user.setCity(city);
+       user.setCountry(country);
+       user.setCuisine(cuisine);
+       user.setName(name);
+       user.setEmail(email);
+       user.setPhone(phone);
+       user.setState(state);
+       updateUser(user);
 
-        return "login";
-    }*/
+        return "profile";
+    }
     @RequestMapping("/loginMethod")
     public String loginMethod(
             @RequestParam(required = true, value = "username") String username,

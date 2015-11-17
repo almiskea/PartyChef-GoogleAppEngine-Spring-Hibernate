@@ -57,9 +57,8 @@ public class Database {
         return emf.createEntityManager();
     }
 
-    
     public static void insertUser(String username, String password, String name, String country, String city, String state, String zip, String email, String phone, String cuisine) throws ClassNotFoundException, SQLException {
-        UsersDao.addUser(username,  password, name, country,  city, state, zip, email, phone, cuisine);
+        UsersDao.addUser(username, password, name, country, city, state, zip, email, phone, cuisine);
     }
 
     public static boolean getValidUserAndPass(String username, String password) throws ClassNotFoundException, SQLException {
@@ -90,7 +89,7 @@ public class Database {
                 .getResultList();
         for (Users g : result) {
 
-            if (g.getUsername().equals(username) ) {
+            if (g.getUsername().equals(username)) {
                 em.getTransaction().commit();
                 em.close();
                 return true;
@@ -100,7 +99,7 @@ public class Database {
         em.close();
         return false;
     }
-    
+
     public static Boolean getValidEmail(String email) throws ClassNotFoundException, SQLException {
         EntityManager em = Database.getEntityManager();
         em.getTransaction().begin();
@@ -109,7 +108,7 @@ public class Database {
                 .getResultList();
         for (Users g : result) {
 
-            if (g.getEmail().equals(email) ) {
+            if (g.getEmail().equals(email)) {
                 em.getTransaction().commit();
                 em.close();
                 return true;
@@ -119,6 +118,7 @@ public class Database {
         em.close();
         return false;
     }
+
     public static Users getEmail(String email) throws ClassNotFoundException, SQLException {
         EntityManager em = Database.getEntityManager();
         em.getTransaction().begin();
@@ -127,7 +127,7 @@ public class Database {
                 .getResultList();
         for (Users g : result) {
 
-            if (g.getEmail().equals(email) ) {
+            if (g.getEmail().equals(email)) {
                 em.getTransaction().commit();
                 em.close();
                 return g;
@@ -137,6 +137,7 @@ public class Database {
         em.close();
         return null;
     }
+
     public static Users getUsername(String user) throws ClassNotFoundException, SQLException {
         EntityManager em = Database.getEntityManager();
         em.getTransaction().begin();
@@ -145,7 +146,58 @@ public class Database {
                 .getResultList();
         for (Users g : result) {
 
-            if (g.getUsername().equals(user) ) {
+            if (g.getUsername().equals(user)) {
+                em.getTransaction().commit();
+                em.close();
+                return g;
+            }
+        }
+        em.getTransaction().commit();
+        em.close();
+        return null;
+    }
+
+    public static Users updateUser(Users user) throws ClassNotFoundException, SQLException {
+        EntityManager em = Database.getEntityManager();
+        em.getTransaction().begin();
+        List<Users> result = em
+                .createQuery("FROM Users", Users.class)
+                .getResultList();
+        for (Users g : result) {
+
+            if (g.getUsername().equals(user.getUsername())) {
+
+                if (user.getCity().length() != 0) {
+                    g.setCity(user.getCity());
+                }
+                if (user.getCountry().length() != 0) {
+                    g.setCountry(user.getCountry());
+                }
+                if (user.getCuisine().length() != 0) {
+                    g.setCuisine(user.getCuisine());
+                }
+                if (user.getName().length() != 0) {
+                    g.setName(user.getName());
+                }
+                if(user.getState().length() != 0){
+                    g.setState(user.getState());
+                }
+               // 
+                /*
+                if(user.getPhone().length() != 0){
+                    g.setPhone(user.getPhone());
+                }
+                
+                if(user.getEmail() != null){
+                    g.setEmail(user.getEmail());
+                }
+                
+                if(user.getZip() != null){
+                    g.setZip(user.getZip());
+                } 
+                */
+                
+
                 em.getTransaction().commit();
                 em.close();
                 return g;
