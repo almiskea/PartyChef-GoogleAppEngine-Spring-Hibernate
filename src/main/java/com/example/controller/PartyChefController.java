@@ -42,10 +42,12 @@ public class PartyChefController {
     public String login() {
         return "login";
     }
+
     @RequestMapping("/Error")
     public String Error() {
         return "Error";
     }
+
     @RequestMapping("/EmailSend")
     public String EmailSend() {
         return "EmailSend";
@@ -70,35 +72,43 @@ public class PartyChefController {
     public String index() {
         return "index";
     }
+
     @RequestMapping("/profile")
     public String profile() {
         return "profile";
     }
+
+    @RequestMapping("/images")
+    public String images() {
+        return "images";
+    }
+
     @RequestMapping("/profileUpdate")
-    public String profileMethod(HttpSession session,@RequestParam Map<String,String> reqPar) throws ClassNotFoundException, SQLException {
-       String uesrname = (String)session.getAttribute("username");
-       String city = reqPar.get("city");
-       String name = reqPar.get("name");
-       String country = reqPar.get("country");
-       String cuisine = reqPar.get("cuisine");
-       String zip = reqPar.get("zip");
-       String phone = reqPar.get("phone");
-       String email = reqPar.get("email");
-       String state = reqPar.get("state");
-       Users user = new Users();
-      // Users u.get
-       user.setUsername(uesrname);
-       user.setCity(city);
-       user.setCountry(country);
-       user.setCuisine(cuisine);
-       user.setName(name);
-       user.setEmail(email);
-       user.setPhone(phone);
-       user.setState(state);
-       updateUser(user);
+    public String profileMethod(HttpSession session, @RequestParam Map<String, String> reqPar) throws ClassNotFoundException, SQLException {
+        String uesrname = (String) session.getAttribute("username");
+        String city = reqPar.get("city");
+        String name = reqPar.get("name");
+        String country = reqPar.get("country");
+        String cuisine = reqPar.get("cuisine");
+        String zip = reqPar.get("zip");
+        String phone = reqPar.get("phone");
+        String email = reqPar.get("email");
+        String state = reqPar.get("state");
+        Users user = new Users();
+        // Users u.get
+        user.setUsername(uesrname);
+        user.setCity(city);
+        user.setCountry(country);
+        user.setCuisine(cuisine);
+        user.setName(name);
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setState(state);
+        updateUser(user);
 
         return "profile";
     }
+
     @RequestMapping("/loginMethod")
     public String loginMethod(
             @RequestParam(required = true, value = "username") String username,
@@ -136,12 +146,11 @@ public class PartyChefController {
 
     @RequestMapping("/signUpMethod")
     public String signUpMethod(@ModelAttribute("user") Users user, Model model) throws ClassNotFoundException, SQLException {
-        
-        
+
         //these two lines to check if the user and email entered are valid
         boolean existUser = Database.getValidUser(user.getUsername());
         boolean existEmail = Database.getValidEmail(user.getEmail());
-        
+
         if (existUser) {
 
             model.addAttribute("msgUser", "username already exists");
@@ -150,12 +159,12 @@ public class PartyChefController {
             //RequestDispatcher rd = req.getRequestDispatcher("signUp.jsp");
             // rd.forward(req, response);
 
-        } else if (existEmail){
+        } else if (existEmail) {
 
             model.addAttribute("msgEmail", "email already exists");
             return "signUp";
-            
-        }else {
+
+        } else {
 
             Database.insertUser(user.getUsername(), user.getPassword(), user.getName(), user.getCountry(), user.getCity(), user.getState(), user.getZip(), user.getEmail(), user.getPhone(), user.getCuisine());
 
@@ -166,7 +175,7 @@ public class PartyChefController {
 
     @RequestMapping("/logoutMethod")
     public String logoutMethod(HttpSession session) {
-       // session.removeAttribute("username");
+        // session.removeAttribute("username");
         session.invalidate();
 
         return "login";

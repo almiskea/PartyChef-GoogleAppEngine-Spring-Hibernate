@@ -2,6 +2,7 @@ package com.example.controller;
 
 import dao.Users;
 import com.google.appengine.api.utils.SystemProperty;
+import dao.UploadFile;
 import dao.UsersDao;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +15,8 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -59,6 +62,16 @@ public class Database {
 
     public static void insertUser(String username, String password, String name, String country, String city, String state, String zip, String email, String phone, String cuisine) throws ClassNotFoundException, SQLException {
         UsersDao.addUser(username, password, name, country, city, state, zip, email, phone, cuisine);
+    }
+
+    public static void saveFile(UploadFile uploadFile) throws ClassNotFoundException, SQLException {
+
+        EntityManager em = Database.getEntityManager();
+
+        em.getTransaction().begin();
+        em.persist(new UploadFile(uploadFile.getFileName(), uploadFile.getId(), uploadFile.getData()));
+        em.getTransaction().commit();
+        em.close();
     }
 
     public static boolean getValidUserAndPass(String username, String password) throws ClassNotFoundException, SQLException {
@@ -179,24 +192,23 @@ public class Database {
                 if (user.getName().length() != 0) {
                     g.setName(user.getName());
                 }
-                if(user.getState().length() != 0){
+                if (user.getState().length() != 0) {
                     g.setState(user.getState());
                 }
                // 
                 /*
-                if(user.getPhone().length() != 0){
-                    g.setPhone(user.getPhone());
-                }
+                 if(user.getPhone().length() != 0){
+                 g.setPhone(user.getPhone());
+                 }
                 
-                if(user.getEmail() != null){
-                    g.setEmail(user.getEmail());
-                }
+                 if(user.getEmail() != null){
+                 g.setEmail(user.getEmail());
+                 }
                 
-                if(user.getZip() != null){
-                    g.setZip(user.getZip());
-                } 
-                */
-                
+                 if(user.getZip() != null){
+                 g.setZip(user.getZip());
+                 } 
+                 */
 
                 em.getTransaction().commit();
                 em.close();
