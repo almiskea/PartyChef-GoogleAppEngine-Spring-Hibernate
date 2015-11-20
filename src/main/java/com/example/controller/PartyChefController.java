@@ -20,6 +20,8 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import dao.Users;
 import dao.UsersDao;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
@@ -27,8 +29,30 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Logger;
+
+import javax.jdo.PersistenceManager;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.google.appengine.api.datastore.Blob;
+
+import dao.MyImage;
+import javax.persistence.EntityManager;
 
 @Controller
 public class PartyChefController {
@@ -109,6 +133,31 @@ public class PartyChefController {
         return "profile";
     }
 
+    @RequestMapping("/doUpload")
+    public String doUpload(HttpServletRequest req) throws FileUploadException, IOException, ClassNotFoundException, SQLException {
+        // Get the image representation
+
+        // Get the image representation
+        ServletFileUpload upload = new ServletFileUpload();
+        FileItemIterator iter = upload.getItemIterator(req);
+        FileItemStream imageItem = iter.next();
+        InputStream imgStream = imageItem.openStream();
+
+            // construct our entity objects
+        // original, but appengine does not support sun.misc.IOUtils.
+        //Blob imageBlob = new Blob(IOUtils.toByteArray(imgStream));
+        //Blob imageBlob = new Blob(IOUtils.readFully(imgStream, -1, true));
+        com.google.appengine.api.datastore.Blob imageBlob = new com.google.appengine.api.datastore.Blob(stream2byte(imgStream));
+
+        MyImage myImage = new MyImage(imageBlob);
+
+        Database.insertImages(myImage);
+            // persist image
+        // respond to query
+        System.out.println("\n\n\n\n\nI am Converting to Byte\n\n\n\n");
+        return "Home";
+    }
+
     @RequestMapping("/loginMethod")
     public String loginMethod(
             @RequestParam(required = true, value = "username") String username,
@@ -179,5 +228,21 @@ public class PartyChefController {
         session.invalidate();
 
         return "login";
+    }
+
+    private byte[] stream2byte(InputStream is) throws IOException {
+
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+        int nRead;
+        byte[] data = new byte[16384];
+
+        while ((nRead = is.read(data, 0, data.length)) != -1) {
+            buffer.write(data, 0, nRead);
+        }
+
+        buffer.flush();
+
+        return buffer.toByteArray();
     }
 }

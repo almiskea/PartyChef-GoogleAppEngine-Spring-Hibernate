@@ -2,6 +2,8 @@ package com.example.controller;
 
 import dao.Users;
 import com.google.appengine.api.utils.SystemProperty;
+import dao.MyImage;
+import dao.MyImageDao;
 import dao.UploadFile;
 import dao.UsersDao;
 import java.sql.Connection;
@@ -63,13 +65,16 @@ public class Database {
     public static void insertUser(String username, String password, String name, String country, String city, String state, String zip, String email, String phone, String cuisine) throws ClassNotFoundException, SQLException {
         UsersDao.addUser(username, password, name, country, city, state, zip, email, phone, cuisine);
     }
+    public static void insertImages(MyImage image) throws ClassNotFoundException, SQLException {
+        MyImageDao.addImage(image);
+    }
 
-    public static void saveFile(UploadFile uploadFile) throws ClassNotFoundException, SQLException {
+    public static void saveFile(MyImage myImage) throws ClassNotFoundException, SQLException {
 
         EntityManager em = Database.getEntityManager();
 
         em.getTransaction().begin();
-        em.persist(new UploadFile(uploadFile.getFileName(), uploadFile.getId(), uploadFile.getData()));
+        em.persist(myImage);
         em.getTransaction().commit();
         em.close();
     }
