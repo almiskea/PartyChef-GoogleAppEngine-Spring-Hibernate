@@ -1,39 +1,20 @@
 package com.example.controller;
 
-import com.example.controller.Database;
 import static com.example.controller.Database.updateUser;
-import java.util.Date;
+import com.google.appengine.api.datastore.Blob;
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import dao.Users;
 import dao.UsersDao;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.fileupload.FileItemIterator;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -49,10 +30,16 @@ import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.google.appengine.api.datastore.Blob;
-
-import dao.MyImage;
+import dao.MyImages;
+import dao.MyImageDao;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.OutputStream;
 import javax.persistence.EntityManager;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.io.IOUtils;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class PartyChefController {
@@ -107,6 +94,11 @@ public class PartyChefController {
         return "images";
     }
 
+    @RequestMapping("/displayImage")
+    public String displayImage() {
+        return "displayImage";
+    }
+
     @RequestMapping("/profileUpdate")
     public String profileMethod(HttpSession session, @RequestParam Map<String, String> reqPar) throws ClassNotFoundException, SQLException {
         String uesrname = (String) session.getAttribute("username");
@@ -133,9 +125,21 @@ public class PartyChefController {
         return "profile";
     }
 
-    @RequestMapping("/doUpload")
-    public String doUpload(HttpServletRequest req) throws FileUploadException, IOException, ClassNotFoundException, SQLException {
-        // Get the image representation
+    /*@RequestMapping(value = "/display", method = RequestMethod.GET)
+    public void display(HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
+
+        byte[] image = MyImageDao.getImage(6).getBytes();
+        ByteArrayInputStream bis = new ByteArrayInputStream(image);
+        InputStream input = bis;
+        OutputStream o = response.getOutputStream();
+        response.setContentType("image/jpeg");
+        o.write(image);
+        o.flush();
+        o.close();
+    }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public String save(HttpServletRequest req, HttpServletResponse res) throws IOException, FileUploadException, ClassNotFoundException, SQLException {
 
         // Get the image representation
         ServletFileUpload upload = new ServletFileUpload();
@@ -143,20 +147,15 @@ public class PartyChefController {
         FileItemStream imageItem = iter.next();
         InputStream imgStream = imageItem.openStream();
 
-            // construct our entity objects
-        // original, but appengine does not support sun.misc.IOUtils.
-        //Blob imageBlob = new Blob(IOUtils.toByteArray(imgStream));
-        //Blob imageBlob = new Blob(IOUtils.readFully(imgStream, -1, true));
-        com.google.appengine.api.datastore.Blob imageBlob = new com.google.appengine.api.datastore.Blob(stream2byte(imgStream));
-
+        // construct our entity objects
+        Blob imageBlob = new Blob(IOUtils.toByteArray(imgStream));
         MyImage myImage = new MyImage(imageBlob);
 
-        Database.insertImages(myImage);
-            // persist image
-        // respond to query
-        System.out.println("\n\n\n\n\nI am Converting to Byte\n\n\n\n");
-        return "Home";
-    }
+        // persist image
+        MyImageDao.addImage(myImage);
+
+        return "displayImage";
+    }*/
 
     @RequestMapping("/loginMethod")
     public String loginMethod(
@@ -178,6 +177,8 @@ public class PartyChefController {
             session.setAttribute("username", username);
 
             model.addAttribute("UList");
+            //System.out.print("\n\n\n\n"+MyImageDao.getImage(8).toString()+"\n\n\n\n\n\n");
+            
             return "Home";
             //req.setAttribute("UList", UList);
             //RequestDispatcher rd = req.getRequestDispatcher("Home.jsp");

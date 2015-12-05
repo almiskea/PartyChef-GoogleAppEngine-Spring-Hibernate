@@ -3,17 +3,18 @@
   <persistence-unit name="Demo">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>dao.Users</class>
-    <class>dao.MyImage</class>
+    <class>dao.MyImages</class>
     <properties>
       <property name="javax.persistence.jdbc.user" value="almiskea"/>
       <property name="javax.persistence.jdbc.password" value="123497"/>
       <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
     </properties>
   </persistence-unit>
   <persistence-unit name="Demo1">
     <class>dao.Users</class>
+    <class>dao.MyImages</class>
     <properties>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="hibernate.show_sql" value="true"/>

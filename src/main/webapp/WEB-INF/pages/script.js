@@ -12,6 +12,7 @@
             "<li><a href='about'>About</a></li>" +
             "<li><a href='profile'>Profile</a></li>" +
             "<li><a href='images'>images</a></li>" +
+            "<li><a href='displayImage'>displayImage</a></li>" +
             "</ul>";
 
 
