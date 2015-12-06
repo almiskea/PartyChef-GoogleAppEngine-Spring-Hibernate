@@ -28,7 +28,22 @@ public class MyImages implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Id
     private int id;
+    
+    private String username;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public MyImages(String username, Blob image) {
+        this.username = username;
+        this.image = image;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+   
     Blob image;
 
     public MyImages() { }

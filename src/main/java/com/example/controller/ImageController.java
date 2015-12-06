@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
@@ -34,7 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ImageController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String save(HttpServletRequest req, HttpServletResponse res) throws IOException, FileUploadException, ClassNotFoundException, SQLException {
+    public String save(HttpServletRequest req, HttpServletResponse res,HttpSession session) throws IOException, FileUploadException, ClassNotFoundException, SQLException {
 
         // Get the image representation
         ServletFileUpload upload = new ServletFileUpload();
@@ -47,16 +48,19 @@ public class ImageController {
         MyImages myImage = new MyImages(imageBlob);
 
         // persist image
-        MyImageDao.addImage(myImage);
+        String user = (String) session.getAttribute("username");
+        MyImageDao.addImage(user,myImage);
 
         // respond to query
         return "Home";
     }
 
     @RequestMapping(value = "/serve", method = RequestMethod.GET)
-    public void serve(HttpServletResponse response,Model model) throws ClassNotFoundException, SQLException, IOException {
-
-        byte[] image = MyImageDao.getImage(1).getImage().getBytes();
+    public void serve(HttpServletRequest request,HttpServletResponse response,Model model) throws ClassNotFoundException, SQLException, IOException {
+        
+        int id = Integer.parseInt((String) request.getParameter("id"));
+        
+        byte[] image = MyImageDao.getImage(id).getImage().getBytes();
         ByteArrayInputStream bis = new ByteArrayInputStream(image);
         InputStream input = bis;
         OutputStream o = response.getOutputStream();

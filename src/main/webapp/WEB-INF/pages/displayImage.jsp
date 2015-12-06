@@ -4,11 +4,6 @@
     Author     : Ali
 --%>
 
-<%@page import="java.io.InputStream"%>
-<%@page import="java.io.ByteArrayInputStream"%>
-<%@page import="java.io.OutputStream"%>
-<%@page import="com.google.appengine.api.datastore.Blob"%>
-<%@page import="dao.MyImageDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,11 +14,13 @@
     <body>
         <h1>Display Image</h1>
         
-        <img src="serve"/>
+        
         
          <form action="serve">
             <table border="0">
                 <tr>
+                    <img src="serve"/>
+                    <input type="text" name="id"/>
                     <td colspan="2" align="center"><input type="submit" value="show" /></td>
                 </tr>
             </table>

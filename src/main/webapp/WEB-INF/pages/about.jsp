@@ -17,7 +17,7 @@
   <nav id="nav01"></nav>
   
   <div id="main">
-          Welcome ${sessionScope.username}
+          Welcome ${sessionScope.user.username}
           <br><br>
           <a href="logoutMethod">Logout</a>
 	  <h1>About Us</h1>

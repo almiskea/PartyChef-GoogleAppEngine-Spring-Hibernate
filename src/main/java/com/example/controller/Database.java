@@ -65,9 +65,7 @@ public class Database {
     public static void insertUser(String username, String password, String name, String country, String city, String state, String zip, String email, String phone, String cuisine) throws ClassNotFoundException, SQLException {
         UsersDao.addUser(username, password, name, country, city, state, zip, email, phone, cuisine);
     }
-    public static void insertImages(MyImages image) throws ClassNotFoundException, SQLException {
-        MyImageDao.addImage(image);
-    }
+    
 
     public static void saveFile(MyImages myImage) throws ClassNotFoundException, SQLException {
 
@@ -79,7 +77,7 @@ public class Database {
         em.close();
     }
 
-    public static boolean getValidUserAndPass(String username, String password) throws ClassNotFoundException, SQLException {
+    public static Users getValidUserAndPass(String username, String password) throws ClassNotFoundException, SQLException {
 
         EntityManager em = Database.getEntityManager();
         em.getTransaction().begin();
@@ -91,12 +89,12 @@ public class Database {
             if (g.getUsername().equals(username) && g.getPassword().equals(password)) {
                 em.getTransaction().commit();
                 em.close();
-                return true;
+                return g;
             }
         }
         em.getTransaction().commit();
         em.close();
-        return false;
+        return null;
     }
 
     public static boolean getValidUser(String username) throws ClassNotFoundException, SQLException {

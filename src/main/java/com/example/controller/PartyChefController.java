@@ -101,61 +101,52 @@ public class PartyChefController {
 
     @RequestMapping("/profileUpdate")
     public String profileMethod(HttpSession session, @RequestParam Map<String, String> reqPar) throws ClassNotFoundException, SQLException {
-        String uesrname = (String) session.getAttribute("username");
+        Users user = (Users) session.getAttribute("user");
+        String username = user.getUsername();
+        session.getAttribute("user");
         String city = reqPar.get("city");
         String name = reqPar.get("name");
+        System.out.print("\n\n\n\n\n\n\n\n\n\n" + name + "\n\n\n\n\n\n\n\n");
+        if(username.length() == 0){
+            return "Home";
+        }
         String country = reqPar.get("country");
         String cuisine = reqPar.get("cuisine");
         String zip = reqPar.get("zip");
         String phone = reqPar.get("phone");
         String email = reqPar.get("email");
         String state = reqPar.get("state");
-        Users user = new Users();
+        
         // Users u.get
-        user.setUsername(uesrname);
-        user.setCity(city);
-        user.setCountry(country);
-        user.setCuisine(cuisine);
-        user.setName(name);
-        user.setEmail(email);
-        user.setPhone(phone);
-        user.setState(state);
+        /*if (username.length() != 0) {
+            user.setUsername(username);
+        }*/
+        if (city.length() != 0) {
+            user.setCity(city);
+        }
+        if (country.length() != 0) {
+            user.setCountry(country);
+        }
+        if (cuisine.length() != 0) {
+            user.setCuisine(cuisine);
+        }
+        if (name.length() != 0) {
+            user.setName(name);
+        }
+        /*if (email.length() != 0) {
+            user.setEmail(email);
+        }
+        if (phone.length() != 0) {
+            user.setPhone(phone);
+        }*/
+        if (state.length() != 0) {
+            user.setState(state);
+        }
+
         updateUser(user);
 
         return "profile";
     }
-
-    /*@RequestMapping(value = "/display", method = RequestMethod.GET)
-    public void display(HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
-
-        byte[] image = MyImageDao.getImage(6).getBytes();
-        ByteArrayInputStream bis = new ByteArrayInputStream(image);
-        InputStream input = bis;
-        OutputStream o = response.getOutputStream();
-        response.setContentType("image/jpeg");
-        o.write(image);
-        o.flush();
-        o.close();
-    }
-
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String save(HttpServletRequest req, HttpServletResponse res) throws IOException, FileUploadException, ClassNotFoundException, SQLException {
-
-        // Get the image representation
-        ServletFileUpload upload = new ServletFileUpload();
-        FileItemIterator iter = upload.getItemIterator(req);
-        FileItemStream imageItem = iter.next();
-        InputStream imgStream = imageItem.openStream();
-
-        // construct our entity objects
-        Blob imageBlob = new Blob(IOUtils.toByteArray(imgStream));
-        MyImage myImage = new MyImage(imageBlob);
-
-        // persist image
-        MyImageDao.addImage(myImage);
-
-        return "displayImage";
-    }*/
 
     @RequestMapping("/loginMethod")
     public String loginMethod(
@@ -163,22 +154,22 @@ public class PartyChefController {
             @RequestParam(required = true, value = "password") String password, HttpSession session,
             Model model) throws ClassNotFoundException, SQLException {
 
-        boolean exist = false;
+        Users exist = null;
 
         exist = Database.getValidUserAndPass(username, password);
 
         //PrintWriter out = response.getWriter();
-        if (exist) {
+        if (exist != null) {
             List<Users> UList = null;
 
             UList = UsersDao.getUsers();
 
             //HttpSession session = req.getSession();
-            session.setAttribute("username", username);
-
-            model.addAttribute("UList");
-            //System.out.print("\n\n\n\n"+MyImageDao.getImage(8).toString()+"\n\n\n\n\n\n");
+            session.setAttribute("user", exist);
+            session.setAttribute("UList", UList);
             
+            //System.out.print("\n\n\n\n"+MyImageDao.getImage(8).toString()+"\n\n\n\n\n\n");
+
             return "Home";
             //req.setAttribute("UList", UList);
             //RequestDispatcher rd = req.getRequestDispatcher("Home.jsp");

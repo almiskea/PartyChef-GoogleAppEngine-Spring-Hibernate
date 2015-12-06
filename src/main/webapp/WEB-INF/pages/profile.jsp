@@ -4,9 +4,7 @@
     Author     : Ali
 --%>
 
-<%@page import="java.util.List"%>
-<%@page import="dao.Users"%>
-<%@page import="dao.UsersDao"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="js/script.js"></script>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -26,7 +24,7 @@
 
         <nav id="nav01"></nav>
         <div id="main">
-            Welcome ${sessionScope.username}
+            Welcome ${sessionScope.user.username}
             <br><br>
             <a href="logoutMethod">Logout</a>
 
@@ -36,55 +34,35 @@
             <form name='profile' action="profileUpdate" method="post" >  
                 <table border="1">
 
-                    <%!
-                        UsersDao u = new UsersDao();
-                        int i = 0;
-                    %>
-                    <%!
-                        Users user;
-                        HttpSession session;
-                        String username;
-                    %>
-                    <%
-                        username = (String) session.getAttribute("username");
-
-                        user = u.getUser(username);
-
-                    %>
-                    <%
-                    %>
-
                     <tr>
                         <td><label for="username">User id:</label>
-                            <% out.print(user.getUsername()); %></td>
+                            ${sessionScope.user.username}</td>
                     </tr><tr>
                         <td><label for="name">Name:</label>
-                            <input type="text" name="name" placeholder="<% out.print(user.getName()); %>"/></td>
+                            <input type="text" name="name" placeholder="${sessionScope.user.name}"/></td>
                     </tr><tr>
                         <td><label for="country">Country:</label>
-                            <input type="text" name="country" placeholder="<% out.print(user.getCountry()); %>"/></td>
+                            <input type="text" name="country" placeholder="${sessionScope.user.country}"/></td>
                     </tr><tr>
                         <td><label for="city">City:</label>
-                            <input type="text" name="city" placeholder="<% out.print(user.getCity()); %>"/></td>
+                            <input type="text" name="city" placeholder="${sessionScope.user.city}"/></td>
                     </tr><tr>
                         <td><label for="state">State:</label>
-                            <input type="text" name="state" placeholder="<% out.print(user.getState()); %>"/></td>
+                            <input type="text" name="state" placeholder="${sessionScope.user.state}"/></td>
                     </tr><tr>
                         <td><label for="zip">Zip:</label>
-                            <input type="text" name="zip" placeholder="<% out.print(user.getZip()); %>"/></td>
+                            <input type="text" name="zip" placeholder="${sessionScope.user.zip}"/></td>
                     </tr><tr>
                         <td><label for="email">Email:</label>
-                            <input type="text" name="email" placeholder="<% out.print(user.getEmail()); %>"/></td>
+                            <input type="text" name="email" placeholder="${sessionScope.user.email}"/></td>
                     </tr><tr>
                         <td><label for="phone">Phone:</label>
-                            <input type="text" name="phone" placeholder="<% out.print(user.getPhone()); %>"/></td>
+                            <input type="text" name="phone" placeholder="${sessionScope.user.phone}"/></td>
                     </tr><tr>
                         <td><label for="cuisine">Cuisine:</label>
-                            <input type="text" name="cuisine" placeholder="<% out.print(user.getCuisine()); %>"/></td>
+                            <input type="text" name="cuisine" placeholder="${sessionScope.user.cuisine}"/></td>
                     </tr>
-                    <%
-
-                    %>
+                    
                 </table>
                 <input type="submit" value="update">
             </form>
