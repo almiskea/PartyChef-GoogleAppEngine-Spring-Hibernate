@@ -28,6 +28,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 /**
  *
  * @author Ali
@@ -36,7 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ImageController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String save(HttpServletRequest req, HttpServletResponse res,HttpSession session) throws IOException, FileUploadException, ClassNotFoundException, SQLException {
+    public String save(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws IOException, FileUploadException, ClassNotFoundException, SQLException {
 
         // Get the image representation
         ServletFileUpload upload = new ServletFileUpload();
@@ -51,19 +52,23 @@ public class ImageController {
         // persist image
         Users us = (Users) session.getAttribute("user");
         String user = us.getUsername();
-        MyImageDao.addImage(user,myImage);
-
+        if (MyImageDao.getImage(user) != null) {
+            MyImageDao.updateImage(user, imageBlob);
+            return "profile";
+        } else {
+            MyImageDao.addImage(user, myImage);
+        }
         // respond to query
         return "Home";
     }
 
     @RequestMapping(value = "/serve", method = RequestMethod.GET)
-    public void serve(HttpServletRequest request,HttpServletResponse response,Model model,HttpSession session) throws ClassNotFoundException, SQLException, IOException {
-        
+    public void serve(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws ClassNotFoundException, SQLException, IOException {
+
         //int id = Integer.parseInt((String) request.getParameter("id"));
         Users us = (Users) session.getAttribute("user");
         String user = us.getUsername();
-        
+
         byte[] image = MyImageDao.getImage(user).getImage().getBytes();
         ByteArrayInputStream bis = new ByteArrayInputStream(image);
         InputStream input = bis;
@@ -73,6 +78,6 @@ public class ImageController {
         o.flush();
         o.close();
        //  model.addAttribute("lenImg", MyImageDao.getImage(1).toString());
-        
+
     }
 }

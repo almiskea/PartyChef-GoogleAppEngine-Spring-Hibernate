@@ -2,23 +2,13 @@ package com.example.controller;
 
 import dao.Users;
 import com.google.appengine.api.utils.SystemProperty;
-import dao.MyImages;
-import dao.MyImageDao;
-import dao.UploadFile;
-import dao.UsersDao;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -60,21 +50,6 @@ public class Database {
         }
 
         return emf.createEntityManager();
-    }
-
-    public static void insertUser(String username, String password, String name, String country, String city, String state, String zip, String email, String phone, String cuisine) throws ClassNotFoundException, SQLException {
-        UsersDao.addUser(username, password, name, country, city, state, zip, email, phone, cuisine);
-    }
-    
-
-    public static void saveFile(MyImages myImage) throws ClassNotFoundException, SQLException {
-
-        EntityManager em = Database.getEntityManager();
-
-        em.getTransaction().begin();
-        em.persist(myImage);
-        em.getTransaction().commit();
-        em.close();
     }
 
     public static Users getValidUserAndPass(String username, String password) throws ClassNotFoundException, SQLException {
@@ -207,12 +182,11 @@ public class Database {
                  if(user.getEmail() != null){
                  g.setEmail(user.getEmail());
                  }
-                
-                 if(user.getZip() != null){
-                 g.setZip(user.getZip());
+                */
+                 if(user.getZip().length() != 0){
+                    g.setZip(user.getZip());
                  } 
-                 */
-
+                 
                 em.getTransaction().commit();
                 em.close();
                 return g;
@@ -223,7 +197,4 @@ public class Database {
         return null;
     }
 
-    /*public static void main(String[] args) throws ClassNotFoundException, SQLException{
-     DataBaseClass.insertEmp("Ali");
-     }*/
 }
