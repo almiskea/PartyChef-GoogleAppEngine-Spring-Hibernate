@@ -9,7 +9,7 @@
 
 <!DOCTYPE html>
 <html>
-<section>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Our Company</title>
@@ -66,6 +66,6 @@
         <script src="${pageContext.request.contextPath}/pages/script.js"></script>
         
     </body>
-    </section>
+
 </html>
 

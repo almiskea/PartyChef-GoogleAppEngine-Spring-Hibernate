@@ -25,7 +25,7 @@
             <style>
                 img {
                     float: right;
-                    margin: 0 25% 10px 10px;
+                    margin: 0 25px 10px 10px;
                 }
             </style>
             <nav id="nav01"></nav>
@@ -43,9 +43,9 @@
                 <form name='profile' action="profileUpdate" method="post" >  
 
                     <c:if test="${sessionScope.image == null}">
-                        <img src="serve"/>
-                        </c:if>
-                       
+                        <img src="serve" height="120" width="120"/>
+                    </c:if>
+
                     <table border="1">
                         <tr>
                             <td><label for="username">User id:</label></td>
@@ -75,10 +75,22 @@
                             <td><label for="cuisine">Cuisine:</label></td>
                             <td><input type="text" name="cuisine" placeholder="${sessionScope.user.cuisine}"/></td>
                         </tr>
+                       
 
                     </table>
                     <input type="submit" value="update">
                 </form>
+                         <form method="post" action="upload" enctype="multipart/form-data">
+                            <table border="0">
+                                <tr>
+                                    <td>Update/Upload profile picture:</td>
+                                    <td><input type="file" name="file1" size="50" /></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="submit" value="Upload" /></td>
+                                </tr>
+                            </table>
+                        </form>
                 <footer id="foot01"></footer>
 
             </div>
