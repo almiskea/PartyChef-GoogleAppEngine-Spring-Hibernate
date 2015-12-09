@@ -21,55 +21,70 @@
     </head>
     <body>
 
+        <section>
+            <style>
+                img {
+                    float: right;
+                    margin: 0 25% 10px 10px;
+                }
+            </style>
+            <nav id="nav01"></nav>
+            <div id="main">
+                Welcome ${sessionScope.user.username}
+                <br><br>
+                <a href="logoutMethod">Logout</a>
 
-        <nav id="nav01"></nav>
-        <div id="main">
-            Welcome ${sessionScope.user.username}
-            <br><br>
-            <a href="logoutMethod">Logout</a>
+                <h1>PATRY CHEF USERS </h1>
+                <h2>Web Site USERS:</h2>
 
-            <h1>PATRY CHEF USERS </h1>
-            <h2>Web Site USERS:</h2>
 
-            <form name='profile' action="profileUpdate" method="post" >  
-                <table border="1">
+                <br>
+                <br>
+                <form name='profile' action="profileUpdate" method="post" >  
 
-                    <tr>
-                        <td><label for="username">User id:</label>
-                            ${sessionScope.user.username}</td>
-                    </tr><tr>
-                        <td><label for="name">Name:</label>
-                            <input type="text" name="name" placeholder="${sessionScope.user.name}"/></td>
-                    </tr><tr>
-                        <td><label for="country">Country:</label>
-                            <input type="text" name="country" placeholder="${sessionScope.user.country}"/></td>
-                    </tr><tr>
-                        <td><label for="city">City:</label>
-                            <input type="text" name="city" placeholder="${sessionScope.user.city}"/></td>
-                    </tr><tr>
-                        <td><label for="state">State:</label>
-                            <input type="text" name="state" placeholder="${sessionScope.user.state}"/></td>
-                    </tr><tr>
-                        <td><label for="zip">Zip:</label>
-                            <input type="text" name="zip" placeholder="${sessionScope.user.zip}"/></td>
-                    </tr><tr>
-                        <td><label for="email">Email:</label>
-                            <input type="text" name="email" placeholder="${sessionScope.user.email}"/></td>
-                    </tr><tr>
-                        <td><label for="phone">Phone:</label>
-                            <input type="text" name="phone" placeholder="${sessionScope.user.phone}"/></td>
-                    </tr><tr>
-                        <td><label for="cuisine">Cuisine:</label>
-                            <input type="text" name="cuisine" placeholder="${sessionScope.user.cuisine}"/></td>
-                    </tr>
-                    
-                </table>
-                <input type="submit" value="update">
-            </form>
-            <footer id="foot01"></footer>
+                    <c:if test="${sessionScope.image == null}">
+                        <img src="serve"/>
+                        </c:if>
+                       
+                    <table border="1">
+                        <tr>
+                            <td><label for="username">User id:</label></td>
+                            <td> ${sessionScope.user.username}</td>
+                        </tr><tr>
+                            <td><label for="name">Name:</label></td>
+                            <td> <input type="text" name="name" placeholder="${sessionScope.user.name}"/></td>
+                        </tr><tr>
+                            <td><label for="country">Country:</label></td>
+                            <td> <input type="text" name="country" placeholder="${sessionScope.user.country}"/></td>
+                        </tr><tr>
+                            <td><label for="city">City:</label>
+                            <td> <input type="text" name="city" placeholder="${sessionScope.user.city}"/></td>
+                        </tr><tr>
+                            <td><label for="state">State:</label></td>
+                            <td>  <input type="text" name="state" placeholder="${sessionScope.user.state}"/></td>
+                        </tr><tr>
+                            <td><label for="zip">Zip:</label></td>
+                            <td>  <input type="text" name="zip" placeholder="${sessionScope.user.zip}"/></td>
+                        </tr><tr>
+                            <td><label for="email">Email:</label></td>
+                            <td> <input type="text" name="email" placeholder="${sessionScope.user.email}"/></td>
+                        </tr><tr>
+                            <td><label for="phone">Phone:</label></td>
+                            <td> <input type="text" name="phone" placeholder="${sessionScope.user.phone}"/></td>
+                        </tr><tr>
+                            <td><label for="cuisine">Cuisine:</label></td>
+                            <td><input type="text" name="cuisine" placeholder="${sessionScope.user.cuisine}"/></td>
+                        </tr>
 
-        </div>
-        <script src="${pageContext.request.contextPath}/pages/script.js"></script>
+                    </table>
+                    <input type="submit" value="update">
+                </form>
+                <footer id="foot01"></footer>
+
+            </div>
+            <script src="${pageContext.request.contextPath}/pages/script.js"></script>
+
+        </section>
     </body>
 </html>
 

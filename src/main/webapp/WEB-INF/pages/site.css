@@ -11,7 +11,8 @@ body {
     padding-left:  15px;
     padding-right: 15px;
     background-color: #ffffff;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 5% 5% 5%;
+    size: 100%;
 }
 
 h1 {
@@ -22,7 +23,7 @@ h1 {
 }
 
 table {
-    width:100%;
+    width:50%;
 }
 
 table, th , td {
@@ -62,4 +63,12 @@ ul#menu li a {
 ul#menu li a:hover {
     color: white;
     background-color: black;
+}
+
+section{
+    
+    width: 70%;
+    padding: 30px;
+    margin: auto;
+    
 }

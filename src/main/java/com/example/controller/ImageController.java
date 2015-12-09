@@ -8,6 +8,7 @@ package com.example.controller;
 import com.google.appengine.api.datastore.Blob;
 import dao.MyImageDao;
 import dao.MyImages;
+import dao.Users;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +49,8 @@ public class ImageController {
         MyImages myImage = new MyImages(imageBlob);
 
         // persist image
-        String user = (String) session.getAttribute("username");
+        Users us = (Users) session.getAttribute("user");
+        String user = us.getUsername();
         MyImageDao.addImage(user,myImage);
 
         // respond to query
@@ -56,11 +58,13 @@ public class ImageController {
     }
 
     @RequestMapping(value = "/serve", method = RequestMethod.GET)
-    public void serve(HttpServletRequest request,HttpServletResponse response,Model model) throws ClassNotFoundException, SQLException, IOException {
+    public void serve(HttpServletRequest request,HttpServletResponse response,Model model,HttpSession session) throws ClassNotFoundException, SQLException, IOException {
         
-        int id = Integer.parseInt((String) request.getParameter("id"));
+        //int id = Integer.parseInt((String) request.getParameter("id"));
+        Users us = (Users) session.getAttribute("user");
+        String user = us.getUsername();
         
-        byte[] image = MyImageDao.getImage(id).getImage().getBytes();
+        byte[] image = MyImageDao.getImage(user).getImage().getBytes();
         ByteArrayInputStream bis = new ByteArrayInputStream(image);
         InputStream input = bis;
         OutputStream o = response.getOutputStream();

@@ -1,8 +1,6 @@
 package com.example.controller;
 
 import static com.example.controller.Database.updateUser;
-import com.google.appengine.api.datastore.Blob;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,27 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Logger;
 
-import javax.jdo.PersistenceManager;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.fileupload.FileItemIterator;
-import org.apache.commons.fileupload.FileItemStream;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
-import dao.MyImages;
-import dao.MyImageDao;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.OutputStream;
-import javax.persistence.EntityManager;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.io.IOUtils;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class PartyChefController {

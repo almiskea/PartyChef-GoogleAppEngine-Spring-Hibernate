@@ -28,15 +28,16 @@ public class MyImageDao implements Serializable{
         em.close();  
     }
     
-    public static MyImages getImage(int id) throws ClassNotFoundException, SQLException {
+    public static MyImages getImage(String user) throws ClassNotFoundException, SQLException {
         EntityManager em = Database.getEntityManager();
         em.getTransaction().begin();
         List<MyImages> result = em
                 .createQuery("FROM MyImages", MyImages.class)
                 .getResultList();
         for (MyImages g : result) {
-
-            if (g.getId() == id) {
+            System.out.println("\n\n\n\n\n"+g.getUsername()+"\n\n\n\n\n\n");
+            if (g.getUsername().equals(user) == true) {
+                System.out.println("\n\n\n\n\n"+g.getUsername()+"\n\n\n\n\n\n");
                 em.getTransaction().commit();
                 em.close();
                 return g;
