@@ -75,23 +75,36 @@
                             <td><label for="cuisine">Cuisine:</label></td>
                             <td><input type="text" name="cuisine" placeholder="${sessionScope.user.cuisine}"/></td>
                         </tr>
-                       
+
 
                     </table>
                     <input type="submit" value="update">
                 </form>
-                         <form method="post" action="upload" enctype="multipart/form-data">
-                            <table border="0">
-                                <tr>
-                                    <td>Update/Upload profile picture:</td>
-                                    <td><input type="file" name="file1" size="50" /></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="submit" value="Upload" /></td>
-                                </tr>
-                            </table>
-                        </form>
-                <footer id="foot01"></footer>
+                <form method="post" action="upload" enctype="multipart/form-data">
+                    <table border="0">
+                        <tr>
+                            <td>Update/Upload profile picture:</td>
+                            <td><input type="file" name="file1" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" value="Upload" /></td>
+                        </tr>
+                    </table>
+                </form>
+                
+
+                <form method="post" action="uploadRecipeImage" enctype="multipart/form-data">
+                    <table border="0">
+                        
+                        <tr>
+                            <td><input type="file" name="file1" size="50" /></td>
+                            <td><input type="submit" value="Upload recepie" /></td>
+                        </tr>
+                    </table>
+                </form>
+                        
+                      <img src="serveRecipeImage" height="120" width="120"/>  
+                        <footer id="foot01"></footer>
 
             </div>
             <script src="${pageContext.request.contextPath}/pages/script.js"></script>

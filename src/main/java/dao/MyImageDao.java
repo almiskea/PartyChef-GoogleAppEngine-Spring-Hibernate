@@ -19,12 +19,12 @@ import static sun.org.mozilla.javascript.internal.Context.exit;
  */
 public class MyImageDao implements Serializable {
 
-    public static void addImage(String username, MyImages image) throws ClassNotFoundException, SQLException {
+    public static void addImage(String username, Blob image) throws ClassNotFoundException, SQLException {
 
         EntityManager em = Database.getEntityManager();
 
         em.getTransaction().begin();
-        em.persist(new MyImages(username, image.getImage()));
+        em.persist(new MyImages(username, image));
         em.getTransaction().commit();
         em.close();
     }

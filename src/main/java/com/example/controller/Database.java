@@ -22,7 +22,7 @@ import javax.persistence.Persistence;
  * @author almiskea
  */
 public class Database {
-
+    
     public static EntityManager getEntityManager() throws ClassNotFoundException, SQLException {
         EntityManagerFactory emf = null;
         Map<String, String> properties = new HashMap();

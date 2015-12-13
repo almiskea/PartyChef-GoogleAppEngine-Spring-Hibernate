@@ -76,6 +76,10 @@ public class PartyChefController {
     public String displayImage() {
         return "displayImage";
     }
+    @RequestMapping("/recipe")
+    public String recipe() {
+        return "recipe";
+    }
 
     @RequestMapping("/profileUpdate")
     public String profileMethod(HttpSession session, @RequestParam Map<String, String> reqPar) throws ClassNotFoundException, SQLException {

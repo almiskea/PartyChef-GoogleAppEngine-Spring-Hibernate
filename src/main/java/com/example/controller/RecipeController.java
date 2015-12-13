@@ -8,13 +8,16 @@ package com.example.controller;
 import com.google.appengine.api.datastore.Blob;
 import dao.MyImageDao;
 import dao.MyImages;
+import dao.Recipe;
+import dao.RecipeDao;
 import dao.Users;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,18 +31,49 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.apache.commons.io.FileUtils;
+//import com.liferay.portal.kernel.upload.UploadPortletRequest;
+
+
 
 /**
  *
  * @author Ali
  */
-@Controller
-public class ImageController {
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String save(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws IOException, FileUploadException, ClassNotFoundException, SQLException {
+@Controller
+public class RecipeController {
+    
+    
+    @RequestMapping(value = "/uploadRecipe", method = RequestMethod.POST)
+    public String saveRecipe(HttpServletRequest req, HttpServletResponse res, HttpSession session,@RequestParam Map<String, String> reqPar) throws IOException, FileUploadException, ClassNotFoundException, SQLException {
 
         // Get the image representation
+        //UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(req);
+        String name = reqPar.get("meal");
+        String description = reqPar.get("description");
+
+        // construct our entity objects
+        Blob imageBlob = (Blob)session.getAttribute("image");
+        session.removeAttribute("image");
+
+        // persist image
+        Users us = (Users) session.getAttribute("user");
+        String user = us.getUsername();
+        
+        RecipeDao.addRecipe(user, name, description, imageBlob);
+
+        // respond to query
+        return "profile";
+    }
+    @RequestMapping(value = "/uploadRecipeImage", method = RequestMethod.POST)
+    public String save(HttpServletRequest req, HttpServletResponse res, HttpSession session,@RequestParam Map<String, String> reqPar) throws IOException, FileUploadException, ClassNotFoundException, SQLException {
+
+        // Get the image representation
+        //UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(req);
+        //String name = reqPar.get("meal");
+        //String description = reqPar.get("description");
+        
         ServletFileUpload upload = new ServletFileUpload();
         FileItemIterator iter = upload.getItemIterator(req);
         FileItemStream imageItem = iter.next();
@@ -47,28 +81,27 @@ public class ImageController {
 
         // construct our entity objects
         Blob imageBlob = new Blob(IOUtils.toByteArray(imgStream));
-
+        
+        session.setAttribute("image", imageBlob);
         // persist image
-        Users us = (Users) session.getAttribute("user");
-        String user = us.getUsername();
-        if (MyImageDao.getImage(user) != null) {
-            MyImageDao.updateImage(user, imageBlob);
-            return "profile";
-        } else {
-            MyImageDao.addImage(user, imageBlob);
-        }
+        //Users us = (Users) session.getAttribute("user");
+        //String user = us.getUsername();
+        
+        //RecipeDao.addRecipe(user, name, description, imageBlob);
+
         // respond to query
-        return "Home";
+        return "recipe";
     }
 
-    @RequestMapping(value = "/serve", method = RequestMethod.GET)
+    @RequestMapping(value = "/serveRecipeImage", method = RequestMethod.GET)
     public void serve(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws ClassNotFoundException, SQLException, IOException {
 
         //int id = Integer.parseInt((String) request.getParameter("id"));
         Users us = (Users) session.getAttribute("user");
         String user = us.getUsername();
-
-        byte[] image = MyImageDao.getImage(user).getImage().getBytes();
+        List<Recipe> ls = RecipeDao.getRecipe(user);
+        byte[] image = ls.get(0).getImage().getBytes();
+        System.out.println("\n\n\n\n\n"+ls.get(0).getUsername()+"\n\n\n\n\n\n\n");
         ByteArrayInputStream bis = new ByteArrayInputStream(image);
         InputStream input = bis;
         OutputStream o = response.getOutputStream();
@@ -79,4 +112,5 @@ public class ImageController {
        //  model.addAttribute("lenImg", MyImageDao.getImage(1).toString());
 
     }
+    
 }
