@@ -20,7 +20,7 @@
                 <tr>
 
                     <td><input type="text" name="meal" size="12" /></td>
-                    <td><input type="text" name="description" size="12" /></td>
+                    <td><textarea name="description" size="120"> </textarea></td>
                     <td><input type="submit" value="Upload recepie" /></td>
                 </tr>
             </table>

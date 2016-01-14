@@ -17,9 +17,17 @@
             <nav id="nav01"></nav>
 
             <div id="main">
-                Welcome ${sessionScope.user.username}
-                <br><br>
-                <a href="logoutMethod">Logout</a>
+
+
+
+                <div style="padding: 10px 9px">
+                    <ons-toolbar>
+                        <div class="center"> Welcome ${sessionScope.user.username}</div>
+                    </ons-toolbar>
+                    <ons-button  modifier="large" style="margin: 0 auto;" href="logoutMethod">
+                         <a href='logoutMethod'>Logout</a>
+                    </ons-button>
+                </div>
                 <h1>About Us</h1>
                 <p>This website is for all people who either like to cook for others or<br>
                     would like to eat homemade food from people who know how to cook but do not have restaurants.</p>

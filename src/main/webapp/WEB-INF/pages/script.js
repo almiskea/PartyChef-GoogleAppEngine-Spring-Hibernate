@@ -6,13 +6,6 @@
             document.getElementById("foot01").innerHTML =
             "<p>&copy;  " + new Date().getFullYear() + " W3Schools. All rights reserved.</p>";
 
-            document.getElementById("nav01").innerHTML =
-            "<ul id='menu'>" +
-            "<li><a href='Home'>Home</a></li>" +
-            "<li><a href='about'>About</a></li>" +
-            "<li><a href='profile'>Profile</a></li>" +
-            "<li><a href='images'>images</a></li>" +
-            "<li><a href='displayImage'>displayImage</a></li>" +
-            "</ul>";
+            document.getElementById("nav01").innerHTML = "<ons-tabbar position='top'><ons-tab page='Home'></ons-icon><span class='tab-label'>Home</span></ons-tab><ons-tab page='about' active='true'></ons-icon><span class='tab-label'>About</span></ons-tab><ons-tab page='profile'></ons-icon><span class='tab-label'>Profile</span></ons-tab><ons-tab page=''></ons-icon>";
 
 

@@ -1,19 +1,88 @@
 <%-- 
-    Document   : signUp
-    Created on : Oct 18, 2015, 3:46:24 PM
+    Document   : Home
+    Created on : Oct 18, 2015, 3:50:16 PM
     Author     : Ali
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/pages/onsen/onsenui.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/pages/onsen/onsentheme.css">
 
-<!DOCTYPE html>  
-<title>JavaScript Form Validation using a sample registration form</title>   
-<link href="${pageContext.request.contextPath}/pages/forms.css" rel="stylesheet" type="text/css" /> 
-<script src="${pageContext.request.contextPath}/pages/formValidation.js"></script> 
+        <script src="${pageContext.request.contextPath}/pages/onsen/angular.min.js"></script>
+        <script src="${pageContext.request.contextPath}/pages/onsen/onsenui.min.js"></script>
+        <link href="${pageContext.request.contextPath}/pages/site.css" rel="stylesheet" type="text/css" />
+        <script>
+            ons.bootstrap();
+        </script>
 
-</head>  
-<body>  
+        <title>JavaScript Form Validation using a sample registration form</title>   
+        <link href="${pageContext.request.contextPath}/pages/forms.css" rel="stylesheet" type="text/css" /> 
+        <script src="${pageContext.request.contextPath}/pages/formValidation.js"></script> 
+
+    </head>  
+    <body>
+    <ons-page>
+        <form name='registration' action="signUpMethod" method="post" onchange="return formValidation();" >
+            <ons-toolbar>
+                <div class="left"><ons-back-button>Back</ons-back-button></div>
+                <div class="center">Sign up</div>
+            </ons-toolbar>
+
+            <div class="formarea">
+                
+                <div class="form-row">
+                    <font color="red">${msgUser}</font><br>
+                    <input type="text" name="username" class="text-input--underbar width-full" placeholder="Username" value="">
+                    <input type="password" name="password" class="text-input--underbar width-full" placeholder="Password" value="">
+                </div>
+                
+                <div class="form-row">
+                    <input type="text" name="name" class="text-input--underbar width-half" placeholder="Name" value="">
+
+                    <input type="text" name="phone" class="text-input--underbar width-half" placeholder="Phone" value="">
+                </div>
+                
+                <div class="form-row">
+                    <input type="text" name="cuisine" class="text-input--underbar width-half" placeholder="Cuisine" value="">
+                </div>
+                
+                <div class="form-row">
+                    <input type="text" name="country" class="text-input--underbar width-half" placeholder="Country" value="">
+
+                    <input type="text" name="city" class="text-input--underbar width-half" placeholder="City" value="">
+                </div>
+                
+                <div class="form-row">
+                    <input type="text" name="state" class="text-input--underbar width-half" placeholder="State" value="">
+
+                    <input type="text" name="zip" class="text-input--underbar width-half" placeholder="Zip Code" value="">
+                </div>
+                
+
+                <div class="form-row">
+                    <input type="text" name="email" class="text-input--underbar width-full" placeholder="Email" value="">
+                </div>
+
+                
+
+                <div class="lucent">
+                    <p class="note">Password - 7 characters or more</p>
+                </div>
+
+                <div class="vspc form-row">
+                    <ons-button modifier="large--cta"><input type="submit" name="submit" value="Sign up" style="width: 100%; height: 100%" /></ons-button>
+                </div>
+            </div>
+        </form>
+    </ons-page>
+
+</body>
+<!--body>  
     <h1>Registration Form</h1>  
     <p>Use tab keys to move from one input field to the next.</p>  
     <form name='registration' action="signUpMethod" method="post" onchange="return formValidation();" >  
@@ -74,5 +143,5 @@
 
 
 </form>  
-</body>  
+</body-->  
 </html>  

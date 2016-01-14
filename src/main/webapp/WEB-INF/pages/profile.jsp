@@ -30,9 +30,14 @@
             </style>
             <nav id="nav01"></nav>
             <div id="main">
-                Welcome ${sessionScope.user.username}
-                <br><br>
-                <a href="logoutMethod">Logout</a>
+               <div style="padding: 10px 9px">
+        <ons-toolbar>
+        <div class="center"> Welcome ${sessionScope.user.username}</div>
+        </ons-toolbar>
+        <ons-button  modifier="large" style="margin: 0 auto;" >
+           <a href='logoutMethod'>Logout</a>
+        </ons-button>
+        </div>
 
                 <h1>PATRY CHEF USERS </h1>
                 <h2>Web Site USERS:</h2>
