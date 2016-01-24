@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="vspc form-row">
-                    <ons-button modifier="large--cta"><input type="submit" name="submit" value="Sign up" style="width: 100%; height: 100%" /></ons-button>
+                    <ons-button style="background:none;" modifier="large--cta"><input type="submit" name="submit" value="Sign up" style="width: 100%; height: 100%" /></ons-button>
                 </div>
             </div>
         </form>

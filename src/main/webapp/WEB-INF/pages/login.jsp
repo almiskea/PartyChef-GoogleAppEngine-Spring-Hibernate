@@ -13,18 +13,24 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/pages/onsen/onsenui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/pages/onsen/onsentheme.css">
 
-    <script src="${pageContext.request.contextPath}/pages/onsen/angular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/pages/onsen/onsenui.min.js"></script>
+    <script src="${pageContext.request.contextPath}/pages/onsen/angular.js"></script>
+    <script src="${pageContext.request.contextPath}/pages/onsen/onsenui.js"></script>
     <script>
       ons.bootstrap();
     </script>
   </head>
   </head>
   <body>
+      <ons-navigator var="myNavigator"></ons-navigator>
+<script>
+function goTo(page){
+    document.location.href = page;
+}
+</script>
     <ons-page>
       <ons-toolbar>
         <div class="center">Log In</div>
-        <div class="right" ><ons-toolbar-button><a href='signUp'>SignUp</a></ons-toolbar-button></div>
+        <div class="right" ><ons-toolbar-button onclick="goTo('signUp');">Sign Up</ons-toolbar-button></div>
       </ons-toolbar>
 
       <div class="login-form" >
@@ -33,7 +39,7 @@
           <input type="username" name="username" class="text-input--underbar" placeholder="User" value=""><br>
         <input type="password" name="password" class="text-input--underbar" placeholder="Password" value="">
         <br><br>
-        <ons-button modifier="large" class="login-button" type="submit"><input type="submit" value="Login" style="height:100%; width:100%" color="blue"/></ons-button>
+        <ons-button style="background:none;" modifier="large" class="login-button" type="submit"><input type="submit" value="Login" style="height:100%; width:100%" color="blue"/></ons-button>
           </form>
         <br><br>
         <ons-button modifier="quiet" class="forgot-password" size href='EmailSend'>Forgot password?</ons-button>
