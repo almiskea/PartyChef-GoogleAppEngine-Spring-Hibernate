@@ -42,5 +42,12 @@
 
             <script src="${pageContext.request.contextPath}/pages/script.js"></script>
         </section>
+         <ons-bottom-toolbar>
+                <div style='text-align: center;'>
+                    <ons-toolbar-button onclick="goTo('Home');">Home</ons-toolbar-button>
+                    <ons-toolbar-button ng-click="app.navi.pushPage('profile');">Profile</ons-toolbar-button>
+                    <ons-toolbar-button ng-click="app.navi.pushPage('about');">About</ons-toolbar-button>
+                </div>
+            </ons-bottom-toolbar>
     </body>
 </html>

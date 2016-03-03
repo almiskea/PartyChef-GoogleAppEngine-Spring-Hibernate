@@ -9,7 +9,6 @@
 </head>
 <body>
     <center>
-        <h2>Sorry, the email was not sent because of the following error:</h2>
         <h3>${exception.message}</h3>
         <a href='login'>Login</a></li>
     </center>
