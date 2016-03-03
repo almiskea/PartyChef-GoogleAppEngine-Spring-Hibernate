@@ -12,11 +12,11 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/pages/onsen/onsenui.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/pages/onsen/onsentheme.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
         <script src="${pageContext.request.contextPath}/pages/onsen/angular.js"></script>
         <script src="${pageContext.request.contextPath}/pages/onsen/onsenui.js"></script>
-        
+
         <script>
             ons.bootstrap();
         </script>
@@ -26,6 +26,46 @@
             document.location.href = page;
         }
     </script>
+    <style>
+        .tab {
+            line-height: 1;
+        }
+
+        .tab-icon {
+            font-size: 22px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tab-label {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+        }
+
+        .person-list {
+            border-top: none;
+        }
+
+        .person {
+            line-height: 1;
+        }
+
+        .person-list-header {
+            opacity: 0.6;
+        }
+
+        .person-name {
+            line-height: 44px;
+        }
+
+        .person-image {
+            width: 30px;
+            height: 30px;
+            margin-top: 8px;
+            border-radius: 2px;
+        }
+    </style>
     <body>
 
     <ons-navigator animation="slide" var="app.navi">
@@ -52,11 +92,13 @@
                     app.navi.pushPage('user${element.username}.html');">
                     <ons-row>
                         <ons-col width="40px">
-                            <img src="images/profile-image-0.png" class="person-image">
+                            <img src="serve/${element.username}" class="person-image" />
+
                         </ons-col>
                         <ons-col class="person-name">
                             ${element.name}
                         </ons-col>
+
 
                     </ons-row>
                 </ons-list-item>
@@ -88,6 +130,8 @@
                 <table class = "table">
 
                     <tbody>
+
+
                         <tr>
                             <th>Username</th>
                             <td>${person.username}</td>

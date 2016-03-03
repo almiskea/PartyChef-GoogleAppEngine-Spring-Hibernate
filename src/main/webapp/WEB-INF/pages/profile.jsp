@@ -38,7 +38,8 @@
                     
 
                         <c:if test="${sessionScope.image == null}">
-                            <img src="serve" class="avatar img-circle" height="120" width="120" alt="avatar"/>
+                            <img src="serve/almiskea" class="avatar img-circle" height="120" width="120" alt="avatar"/>
+                            <!--img src="imageController/almiskea" class="avatar img-circle" height="120" width="120" alt="avatar"/-->
                         </c:if>
                         <h6>Upload a different photo...</h6>
                         <form method="post" action="upload" enctype="multipart/form-data">

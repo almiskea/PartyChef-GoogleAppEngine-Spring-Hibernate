@@ -49,5 +49,6 @@
     <mvc:default-servlet-handler/>
     
     <mvc:resources mapping="/pages/**" location="/WEB-INF/pages/" />
+    <mvc:resources mapping="/images/**" location="/Web Pages/images/" />
     <mvc:resources mapping="/pages/onsen/**" location="/WEB-INF/pages/" />
 </beans>
